@@ -1,5 +1,5 @@
 import { Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import { PrismicRichText, SliceComponentProps, PrismicLink } from "@prismicio/react";
 
 /**
  * Props for `Hero`.
@@ -9,7 +9,7 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 /**
  * Component for "Hero" Slices.
  */
-const Hero = ({ slice }: HeroProps): JSX.Element => {
+const Hero = ({ slice }: HeroProps) => {
   const isTextCentered = slice.variation === "textCentered";
 
   return (
@@ -47,13 +47,12 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
           {/* CTA Button */}
           {slice.primary.cta_button_label && slice.primary.cta_button_link && (
             <div className={isTextCentered ? "flex justify-center" : ""}>
-              <a
-                href={slice.primary.cta_button_link.url || "#"}
-                target={slice.primary.cta_button_link.target || "_self"}
+              <PrismicLink
+                field={slice.primary.cta_button_link}
                 className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-lg transition-colors duration-300 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 {slice.primary.cta_button_label}
-              </a>
+              </PrismicLink>
             </div>
           )}
         </div>
