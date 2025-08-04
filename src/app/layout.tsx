@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { PrismicPreview } from "@prismicio/next";
+import { repositoryName } from "../../lib/prismic";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,6 +33,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>
   );
