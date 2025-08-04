@@ -1,17 +1,18 @@
 import { createClient } from '../../../../lib/prismic'
 import { notFound } from 'next/navigation'
+import { draftMode } from 'next/headers'
 import Image from 'next/image'
 import Link from 'next/link'
 
-// Force dynamic rendering to prevent build hanging
-export const dynamic = 'force-dynamic'
-
 export default async function ProjectPage({ params }) {
   const { uid } = await params
+  const { isEnabled } = draftMode()
   const client = createClient()
   
   try {
-    const project = await client.getByUID('project_page', uid)
+    const project = await client.getByUID('project_page', uid, {
+      fetchOptions: isEnabled ? { cache: 'no-store' } : undefined
+    })
     
     return (
       <div className="container mx-auto px-4 py-8">
@@ -109,10 +110,13 @@ export default async function ProjectPage({ params }) {
 // Generate metadata for SEO
 export async function generateMetadata({ params }) {
   const { uid } = await params
+  const { isEnabled } = draftMode()
   const client = createClient()
   
   try {
-    const project = await client.getByUID('project_page', uid)
+    const project = await client.getByUID('project_page', uid, {
+      fetchOptions: isEnabled ? { cache: 'no-store' } : undefined
+    })
     
     return {
       title: project.data.project_title,

@@ -1,18 +1,19 @@
 import { createClient } from '../../../lib/prismic'
+import { draftMode } from 'next/headers'
 import Link from 'next/link'
 import Image from 'next/image'
 
-// Force dynamic rendering to prevent build hanging
-export const dynamic = 'force-dynamic'
-
 export default async function ProjectsPage() {
+  const { isEnabled } = draftMode()
   const client = createClient()
   
   try {
     console.log('Attempting to fetch projects...')
     
     // Fetch all projects directly  
-    const projects = await client.getAllByType('project_page')
+    const projects = await client.getAllByType('project_page', {
+      fetchOptions: isEnabled ? { cache: 'no-store' } : undefined
+    })
     console.log('Found projects:', projects.length)
     console.log('Project data:', projects.map(p => ({
       id: p.id,
