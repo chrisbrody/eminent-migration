@@ -9,13 +9,32 @@ export default async function ProjectPage({ params }) {
   const { isEnabled } = draftMode()
   const client = createClient()
   
+  // Debug logging
+  console.log('🔍 Draft mode enabled:', isEnabled)
+  console.log('🔍 Fetching project UID:', uid)
+  
   try {
     const project = await client.getByUID('project_page', uid, {
       fetchOptions: isEnabled ? { cache: 'no-store' } : undefined
     })
     
+    console.log('🔍 Project fetched:', {
+      id: project.id,
+      title: project.data.project_title,
+      lastModified: project.last_publication_date,
+      isDraft: project.tags?.includes('draft') || project.alternate_languages?.length > 0
+    })
+    
     return (
       <div className="container mx-auto px-4 py-8">
+        {/* Preview indicator */}
+        {isEnabled && (
+          <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6">
+            <p className="font-bold">🎭 Preview Mode Active</p>
+            <p className="text-sm">You are viewing draft content</p>
+          </div>
+        )}
+        
         {/* Back button */}
         <Link 
           href="/projects"
