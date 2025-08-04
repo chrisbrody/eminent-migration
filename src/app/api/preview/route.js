@@ -4,6 +4,7 @@ import { createClient } from "../../../../lib/prismic";
 
 export async function GET(request) {
   const client = createClient();
-  draftMode().enable();
+  const draft = await draftMode();
+  draft.enable();
   await redirectToPreviewURL({ client, request });
 }

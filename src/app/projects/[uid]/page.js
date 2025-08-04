@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 export default async function ProjectPage({ params }) {
   const { uid } = await params
-  const { isEnabled } = draftMode()
+  const { isEnabled } = await draftMode()
   const client = createClient()
   
   // Debug logging
@@ -129,7 +129,7 @@ export default async function ProjectPage({ params }) {
 // Generate metadata for SEO
 export async function generateMetadata({ params }) {
   const { uid } = await params
-  const { isEnabled } = draftMode()
+  const { isEnabled } = await draftMode()
   const client = createClient()
   
   try {

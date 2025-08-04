@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default async function ProjectsPage() {
-  const { isEnabled } = draftMode()
+  const { isEnabled } = await draftMode()
   const client = createClient()
   
   try {
