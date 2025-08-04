@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation'
 import { draftMode } from 'next/headers'
 import Image from 'next/image'
 import Link from 'next/link'
+import { SliceZone } from '@prismicio/react'
+import { components } from '../../../../slices'
 
 export default async function ProjectPage({ params }) {
   const { uid } = await params
@@ -99,12 +101,10 @@ export default async function ProjectPage({ params }) {
           </div>
         )}
         
-        {/* Slice Zone (if you have slices) */}
+        {/* Slice Zone */}
         {project.data.slices && project.data.slices.length > 0 && (
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Project Details</h2>
-            {/* Slices would be rendered here */}
-            <p className="text-gray-600">Custom content sections would appear here</p>
+            <SliceZone slices={project.data.slices} components={components} />
           </div>
         )}
         

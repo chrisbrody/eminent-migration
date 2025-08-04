@@ -11,6 +11,7 @@
   "dependencies": {
     "@prismicio/client": "^7.19.0",
     "@prismicio/next": "^2.0.1",
+    "@prismicio/react": "^3.2.1",
     "@slicemachine/adapter-next": "^0.3.81",
     "next": "15.4.5",
     "react": "19.1.0",

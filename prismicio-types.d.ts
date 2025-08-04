@@ -134,7 +134,66 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
-type ProjectPageDocumentDataSlicesSlice = never;
+/**
+ * Item in *Main Navigation → Navigation Items*
+ */
+export interface MainNavigationDocumentDataNavigationItemsItem {
+  /**
+   * Navigation Label field in *Main Navigation → Navigation Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g., Home, Services, Projects
+   * - **API ID Path**: main_navigation.navigation_items[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Navigation Link field in *Main Navigation → Navigation Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: Internal link, external URL, or document
+   * - **API ID Path**: main_navigation.navigation_items[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Content for Main Navigation documents
+ */
+interface MainNavigationDocumentData {
+  /**
+   * Navigation Items field in *Main Navigation*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: main_navigation.navigation_items[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  navigation_items: prismic.GroupField<
+    Simplify<MainNavigationDocumentDataNavigationItemsItem>
+  >;
+}
+
+/**
+ * Main Navigation document from Prismic
+ *
+ * - **API ID**: `main_navigation`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type MainNavigationDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<MainNavigationDocumentData>,
+    "main_navigation",
+    Lang
+  >;
+
+type ProjectPageDocumentDataSlicesSlice = HeroSlice;
 
 /**
  * Content for Project Page documents
@@ -526,10 +585,173 @@ export type TestimonialDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | HomepageDocument
+  | MainNavigationDocument
   | ProjectPageDocument
   | ServicePageDocument
   | StandardPageDocument
   | TestimonialDocument;
+
+/**
+ * Primary content in *Hero → Text Left → Primary*
+ */
+export interface HeroSliceDefaultPrimary {
+  /**
+   * Title field in *Hero → Text Left → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter your hero title...
+   * - **API ID Path**: hero.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Subtitle field in *Hero → Text Left → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter your hero subtitle...
+   * - **API ID Path**: hero.default.primary.subtitle
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  subtitle: prismic.RichTextField;
+
+  /**
+   * Background Image field in *Hero → Text Left → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.background_image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  background_image: prismic.ImageField<never>;
+
+  /**
+   * CTA Button Label field in *Hero → Text Left → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g., Get Started, Learn More
+   * - **API ID Path**: hero.default.primary.cta_button_label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  cta_button_label: prismic.KeyTextField;
+
+  /**
+   * CTA Button Link field in *Hero → Text Left → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: Select a page or enter URL
+   * - **API ID Path**: hero.default.primary.cta_button_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  cta_button_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+}
+
+/**
+ * Text Left variation for Hero Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HeroSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Hero → Text Centered → Primary*
+ */
+export interface HeroSliceTextCenteredPrimary {
+  /**
+   * Title field in *Hero → Text Centered → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter your hero title...
+   * - **API ID Path**: hero.textCentered.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Subtitle field in *Hero → Text Centered → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter your hero subtitle...
+   * - **API ID Path**: hero.textCentered.primary.subtitle
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  subtitle: prismic.RichTextField;
+
+  /**
+   * Background Image field in *Hero → Text Centered → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.textCentered.primary.background_image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  background_image: prismic.ImageField<never>;
+
+  /**
+   * CTA Button Label field in *Hero → Text Centered → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g., Get Started, Learn More
+   * - **API ID Path**: hero.textCentered.primary.cta_button_label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  cta_button_label: prismic.KeyTextField;
+
+  /**
+   * CTA Button Link field in *Hero → Text Centered → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: Select a page or enter URL
+   * - **API ID Path**: hero.textCentered.primary.cta_button_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  cta_button_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+}
+
+/**
+ * Text Centered variation for Hero Slice
+ *
+ * - **API ID**: `textCentered`
+ * - **Description**: Hero with centered text layout
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSliceTextCentered = prismic.SharedSliceVariation<
+  "textCentered",
+  Simplify<HeroSliceTextCenteredPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Hero*
+ */
+type HeroSliceVariation = HeroSliceDefault | HeroSliceTextCentered;
+
+/**
+ * Hero Shared Slice
+ *
+ * - **API ID**: `hero`
+ * - **Description**: Hero
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -555,6 +777,9 @@ declare module "@prismicio/client" {
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
+      MainNavigationDocument,
+      MainNavigationDocumentData,
+      MainNavigationDocumentDataNavigationItemsItem,
       ProjectPageDocument,
       ProjectPageDocumentData,
       ProjectPageDocumentDataSlicesSlice,
@@ -568,6 +793,12 @@ declare module "@prismicio/client" {
       TestimonialDocument,
       TestimonialDocumentData,
       AllDocumentTypes,
+      HeroSlice,
+      HeroSliceDefaultPrimary,
+      HeroSliceTextCenteredPrimary,
+      HeroSliceVariation,
+      HeroSliceDefault,
+      HeroSliceTextCentered,
     };
   }
 }
