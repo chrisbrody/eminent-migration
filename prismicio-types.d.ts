@@ -470,11 +470,66 @@ export type StandardPageDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Content for Testimonial documents
+ */
+interface TestimonialDocumentData {
+  /**
+   * Client Name field in *Testimonial*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.client_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  client_name: prismic.KeyTextField;
+
+  /**
+   * Quote field in *Testimonial*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.quote
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  quote: prismic.RichTextField;
+
+  /**
+   * Project Link field in *Testimonial*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testimonial.project_link
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  project_link: prismic.ContentRelationshipField;
+}
+
+/**
+ * Testimonial document from Prismic
+ *
+ * - **API ID**: `testimonial`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type TestimonialDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<TestimonialDocumentData>,
+    "testimonial",
+    Lang
+  >;
+
 export type AllDocumentTypes =
   | HomepageDocument
   | ProjectPageDocument
   | ServicePageDocument
-  | StandardPageDocument;
+  | StandardPageDocument
+  | TestimonialDocument;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -510,6 +565,8 @@ declare module "@prismicio/client" {
       StandardPageDocument,
       StandardPageDocumentData,
       StandardPageDocumentDataSlicesSlice,
+      TestimonialDocument,
+      TestimonialDocumentData,
       AllDocumentTypes,
     };
   }
