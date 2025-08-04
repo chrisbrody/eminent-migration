@@ -1,0 +1,108 @@
+{
+  "format": "page",
+  "id": "project_page",
+  "label": "Project Page",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "project_title": {
+        "type": "Text",
+        "config": {
+          "label": "Project Title",
+          "placeholder": ""
+        }
+      },
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "Project Slug",
+          "placeholder": ""
+        }
+      },
+      "location": {
+        "type": "Text",
+        "config": {
+          "label": "Location",
+          "placeholder": ""
+        }
+      },
+      "project_type": {
+        "type": "Select",
+        "config": {
+          "label": "Project Type",
+          "placeholder": "",
+          "options": [
+            "Interior Design",
+            "Remodal/Renovation",
+            "New Construction"
+          ],
+          "default_value": "Interior Design"
+        }
+      },
+      "primary_room": {
+        "type": "Select",
+        "config": {
+          "label": "Primary Room",
+          "placeholder": "",
+          "options": [
+            "Bathroom",
+            "Bedroom",
+            "Home Bar",
+            "Kitchen   ",
+            "Living Room",
+            "Lower Level",
+            "Master Suite",
+            "Whole",
+            "Wine Cellar"
+          ]
+        }
+      },
+      "design_style": {
+        "type": "Select",
+        "config": {
+          "label": "Design Style",
+          "placeholder": "",
+          "options": [
+            "Contemporary",
+            "Eclectic",
+            "Luxury",
+            "Open Concept",
+            "Traditional"
+          ]
+        }
+      },
+      "completion_date": {
+        "type": "Date",
+        "config": {
+          "label": "Completion Date",
+          "placeholder": ""
+        }
+      },
+      "hero_image": {
+        "type": "Image",
+        "config": {
+          "label": "Hero Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "project_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Project Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {}
+        }
+      }
+    }
+  }
+}
