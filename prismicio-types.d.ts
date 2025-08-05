@@ -530,6 +530,71 @@ export type StandardPageDocument<Lang extends string = string> =
   >;
 
 /**
+ * Content for Team Member documents
+ */
+interface TeamMemberDocumentData {
+  /**
+   * Name field in *Team Member*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_member.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Title field in *Team Member*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_member.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Bio field in *Team Member*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_member.bio
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  bio: prismic.RichTextField;
+
+  /**
+   * Headshot field in *Team Member*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_member.headshot
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  headshot: prismic.ImageField<never>;
+}
+
+/**
+ * Team Member document from Prismic
+ *
+ * - **API ID**: `team_member`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type TeamMemberDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<TeamMemberDocumentData>,
+    "team_member",
+    Lang
+  >;
+
+/**
  * Content for Testimonial documents
  */
 interface TestimonialDocumentData {
@@ -589,6 +654,7 @@ export type AllDocumentTypes =
   | ProjectPageDocument
   | ServicePageDocument
   | StandardPageDocument
+  | TeamMemberDocument
   | TestimonialDocument;
 
 /**
@@ -790,6 +856,8 @@ declare module "@prismicio/client" {
       StandardPageDocument,
       StandardPageDocumentData,
       StandardPageDocumentDataSlicesSlice,
+      TeamMemberDocument,
+      TeamMemberDocumentData,
       TestimonialDocument,
       TestimonialDocumentData,
       AllDocumentTypes,
