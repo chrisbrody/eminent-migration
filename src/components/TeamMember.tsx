@@ -6,8 +6,7 @@ export default function TeamMember({
   name, 
   title, 
   bio, 
-  headshot, 
-  featured = false 
+  headshot
 }: TeamMemberProps) {
   const schemaMarkup = {
     "@context": "https://schema.org",
@@ -27,7 +26,7 @@ export default function TeamMember({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
       />
-      <div className={`team-member ${featured ? 'featured' : ''}`}>
+      <div className={`team-member`}>
         <div className="team-member__image">
           {headshot?.url ? (
             <Image
