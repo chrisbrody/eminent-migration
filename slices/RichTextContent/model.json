@@ -1,0 +1,55 @@
+{
+  "id": "rich_text_content",
+  "type": "SharedSlice",
+  "name": "Rich Text Content",
+  "description": "A flexible Slice for general text content, allowing for headings, paragraphs, lists, and embedded images.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default rich text content block",
+      "imageUrl": "",
+      "primary": {
+        "content": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Content",
+            "placeholder": "Enter your content here...",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "text_alignment": {
+          "type": "Select",
+          "config": {
+            "label": "Text Alignment",
+            "placeholder": "Choose alignment",
+            "options": ["left", "center", "right", "justify"],
+            "default_value": "left"
+          }
+        },
+        "text_size": {
+          "type": "Select",
+          "config": {
+            "label": "Text Size",
+            "placeholder": "Choose text size",
+            "options": ["small", "medium", "large"],
+            "default_value": "medium"
+          }
+        },
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "Choose background",
+            "options": ["none", "light-gray", "dark-gray", "blue", "white"],
+            "default_value": "none"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

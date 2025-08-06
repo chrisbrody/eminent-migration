@@ -193,7 +193,7 @@ export type MainNavigationDocument<Lang extends string = string> =
     Lang
   >;
 
-type ProjectPageDocumentDataSlicesSlice = HeroSlice;
+type ProjectPageDocumentDataSlicesSlice = RichTextContentSlice | HeroSlice;
 
 /**
  * Content for Project Page documents
@@ -442,7 +442,7 @@ export type ServicePageDocument<Lang extends string = string> =
     Lang
   >;
 
-type StandardPageDocumentDataSlicesSlice = never;
+type StandardPageDocumentDataSlicesSlice = HeroSlice | RichTextContentSlice;
 
 /**
  * Content for Standard Page documents
@@ -819,6 +819,90 @@ type HeroSliceVariation = HeroSliceDefault | HeroSliceTextCentered;
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
+/**
+ * Primary content in *Rich Text Content → Default → Primary*
+ */
+export interface RichTextContentSliceDefaultPrimary {
+  /**
+   * Content field in *Rich Text Content → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter your content here...
+   * - **API ID Path**: rich_text_content.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  content: prismic.RichTextField;
+
+  /**
+   * Text Alignment field in *Rich Text Content → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Choose alignment
+   * - **Default Value**: left
+   * - **API ID Path**: rich_text_content.default.primary.text_alignment
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  text_alignment: prismic.SelectField<
+    "left" | "center" | "right" | "justify",
+    "filled"
+  >;
+
+  /**
+   * Text Size field in *Rich Text Content → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Choose text size
+   * - **Default Value**: medium
+   * - **API ID Path**: rich_text_content.default.primary.text_size
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  text_size: prismic.SelectField<"small" | "medium" | "large", "filled">;
+
+  /**
+   * Background Color field in *Rich Text Content → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Choose background
+   * - **Default Value**: none
+   * - **API ID Path**: rich_text_content.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<
+    "none" | "light-gray" | "dark-gray" | "blue" | "white",
+    "filled"
+  >;
+}
+
+/**
+ * Default variation for Rich Text Content Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default rich text content block
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type RichTextContentSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<RichTextContentSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Rich Text Content*
+ */
+type RichTextContentSliceVariation = RichTextContentSliceDefault;
+
+/**
+ * Rich Text Content Shared Slice
+ *
+ * - **API ID**: `rich_text_content`
+ * - **Description**: A flexible Slice for general text content, allowing for headings, paragraphs, lists, and embedded images.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type RichTextContentSlice = prismic.SharedSlice<
+  "rich_text_content",
+  RichTextContentSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -867,6 +951,10 @@ declare module "@prismicio/client" {
       HeroSliceVariation,
       HeroSliceDefault,
       HeroSliceTextCentered,
+      RichTextContentSlice,
+      RichTextContentSliceDefaultPrimary,
+      RichTextContentSliceVariation,
+      RichTextContentSliceDefault,
     };
   }
 }
