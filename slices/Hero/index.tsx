@@ -10,13 +10,17 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
  * Component for "Hero" Slices.
  */
 const Hero = ({ slice }: HeroProps) => {
+  if (!slice || !slice.primary) {
+    return <div>Hero slice data not available</div>;
+  }
+  
   const isTextCentered = slice.variation === "textCentered";
 
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-96 flex items-center justify-center overflow-hidden"
       style={{
         backgroundImage: slice.primary.background_image?.url
           ? `url(${slice.primary.background_image.url})`

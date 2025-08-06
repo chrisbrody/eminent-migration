@@ -7,23 +7,34 @@
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
-						"type": "heading2",
-						"content": {
-							"text": "Test Content"
-						}
-					},
-					{
 						"type": "paragraph",
 						"content": {
-							"text": "More test content"
+							"text": "Voluptate esse consectetur id ut. Laboris tempor sit incididunt voluptate commodo nisi nostrud enim elit excepteur amet nisi commodo."
 						}
 					}
 				]
 			},
-			"text_alignment": "center",
-			"text_size": "small",
-			"background_color": "none"
+			"text_alignment": {
+				"__TYPE__": "FieldContent",
+				"value": "left",
+				"type": "Select"
+			},
+			"text_size": {
+				"__TYPE__": "FieldContent",
+				"value": "medium",
+				"type": "Select"
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			}
 		},
-		"items": []
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]

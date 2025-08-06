@@ -26,7 +26,12 @@
           "config": {
             "label": "Text Alignment",
             "placeholder": "Choose alignment",
-            "options": ["left", "center", "right", "justify"],
+            "options": [
+              "left",
+              "center",
+              "right",
+              "justify"
+            ],
             "default_value": "left"
           }
         },
@@ -35,7 +40,11 @@
           "config": {
             "label": "Text Size",
             "placeholder": "Choose text size",
-            "options": ["small", "medium", "large"],
+            "options": [
+              "small",
+              "medium",
+              "large"
+            ],
             "default_value": "medium"
           }
         },
@@ -44,7 +53,13 @@
           "config": {
             "label": "Background Color",
             "placeholder": "Choose background",
-            "options": ["none", "light-gray", "dark-gray", "blue", "white"],
+            "options": [
+              "none",
+              "light-gray",
+              "dark-gray",
+              "blue",
+              "white"
+            ],
             "default_value": "none"
           }
         }

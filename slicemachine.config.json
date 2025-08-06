@@ -1,5 +1,6 @@
 {
   "repositoryName": "eminentidmarketingsite",
   "adapter": "@slicemachine/adapter-next",
-  "libraries": ["./slices"]
+  "libraries": ["./slices"],
+  "localSliceSimulatorURL": "https://eminent-migration.vercel.app/slice-simulator"
 }
