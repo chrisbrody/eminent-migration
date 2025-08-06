@@ -7,19 +7,23 @@
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
+						"type": "heading2",
+						"content": {
+							"text": "Test Content"
+						}
+					},
+					{
 						"type": "paragraph",
 						"content": {
-							"text": "Enim officia aute eu Lorem laboris dolor mollit duis sint. Culpa non mollit ad consectetur quis laboris ad. Adipisicing ut do ipsum id aute commodo aliquip in."
+							"text": "More test content"
 						}
 					}
 				]
-			}
+			},
+			"text_alignment": "center",
+			"text_size": "small",
+			"background_color": "none"
 		},
-		"items": [
-			{
-				"__TYPE__": "GroupItemContent",
-				"value": []
-			}
-		]
+		"items": []
 	}
 ]

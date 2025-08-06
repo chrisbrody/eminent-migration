@@ -10,10 +10,10 @@ export type RichTextContentProps = SliceComponentProps<Content.RichTextContentSl
  * Component for "RichTextContent" Slices.
  */
 const RichTextContent = ({ slice }: RichTextContentProps) => {
-  // Get styling options with safe access
-  const alignment = (slice.primary as any).text_alignment || 'left';
-  const textSize = (slice.primary as any).text_size || 'medium';
-  const backgroundColor = (slice.primary as any).background_color || 'none';
+  // Get styling options with safe access and proper typing
+  const alignment = slice.primary.text_alignment || 'left';
+  const textSize = slice.primary.text_size || 'medium';
+  const backgroundColor = slice.primary.background_color || 'none';
 
   // Build CSS classes based on options
   const alignmentClasses = {
