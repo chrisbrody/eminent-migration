@@ -1,4 +1,4 @@
-import { Content } from "@prismicio/client";
+import { Content, asText } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 
 /**
@@ -21,8 +21,8 @@ const Hero = ({ slice }: HeroProps) => {
       }}
     >
       <h1>Hero Slice - {slice.variation}</h1>
-      <p>Title: {slice.primary?.title?.[0]?.text || "No title"}</p>
-      <p>Subtitle: {slice.primary?.subtitle?.[0]?.text || "No subtitle"}</p>
+      <p>Title: {asText(slice.primary.title) || "No title"}</p>
+      <p>Subtitle: {asText(slice.primary.subtitle) || "No subtitle"}</p>
     </section>
   );
 };
