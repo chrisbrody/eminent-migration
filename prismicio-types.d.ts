@@ -194,6 +194,7 @@ export type MainNavigationDocument<Lang extends string = string> =
   >;
 
 type ProjectPageDocumentDataSlicesSlice =
+  | FaqSlice
   | ImageGallerySlice
   | RichTextContentSlice
   | HeroSlice;
@@ -661,6 +662,113 @@ export type AllDocumentTypes =
   | TestimonialDocument;
 
 /**
+ * Primary content in *FAQ → Default → Primary*
+ */
+export interface FaqSliceDefaultPrimary {
+  /**
+   * Tagline field in *FAQ → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: FAQ section
+   * - **API ID Path**: faq.default.primary.tagline
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  tagline: prismic.KeyTextField;
+
+  /**
+   * Title field in *FAQ → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Frequently Asked Questions
+   * - **API ID Path**: faq.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Description field in *FAQ → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: We've compiled the most important information to help you get the most out of your interior design experience. Can't find what you're looking for?
+   * - **API ID Path**: faq.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Contact Link Text field in *FAQ → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Contact us
+   * - **API ID Path**: faq.default.primary.contact_link_text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  contact_link_text: prismic.KeyTextField;
+
+  /**
+   * Contact Link field in *FAQ → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: Select a page or enter URL
+   * - **API ID Path**: faq.default.primary.contact_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  contact_link: prismic.LinkField;
+}
+
+/**
+ * Primary content in *FAQ → Items*
+ */
+export interface FaqSliceDefaultItem {
+  /**
+   * Question field in *FAQ → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter your question here...
+   * - **API ID Path**: faq.items[].question
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  question: prismic.KeyTextField;
+
+  /**
+   * Answer field in *FAQ → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter your answer here...
+   * - **API ID Path**: faq.items[].answer
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  answer: prismic.RichTextField;
+}
+
+/**
+ * Default variation for FAQ Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FaqSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<FaqSliceDefaultPrimary>,
+  Simplify<FaqSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *FAQ*
+ */
+type FaqSliceVariation = FaqSliceDefault;
+
+/**
+ * FAQ Shared Slice
+ *
+ * - **API ID**: `faq`
+ * - **Description**: FAQ
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type FaqSlice = prismic.SharedSlice<"faq", FaqSliceVariation>;
+
+/**
  * Primary content in *Hero → Text Left → Primary*
  */
 export interface HeroSliceDefaultPrimary {
@@ -1023,6 +1131,11 @@ declare module "@prismicio/client" {
       TestimonialDocument,
       TestimonialDocumentData,
       AllDocumentTypes,
+      FaqSlice,
+      FaqSliceDefaultPrimary,
+      FaqSliceDefaultItem,
+      FaqSliceVariation,
+      FaqSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceTextCenteredPrimary,

@@ -1,0 +1,92 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "tagline": {
+        "__TYPE__": "FieldContent",
+        "value": "FAQ section",
+        "type": "Text"
+      },
+      "title": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "heading2",
+            "content": {
+              "text": "Frequently asked questions"
+            }
+          }
+        ]
+      },
+      "description": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "We've compiled the most important information to help you."
+            }
+          }
+        ]
+      },
+      "contact_link_text": {
+        "__TYPE__": "FieldContent",
+        "value": "Contact us",
+        "type": "Text"
+      },
+      "contact_link": {
+        "key": "contact-link-key",
+        "__TYPE__": "LinkContent",
+        "value": {
+          "__TYPE__": "ExternalLink",
+          "url": "/contact"
+        }
+      }
+    },
+    "items": [
+      {
+        "question": "What interior design services do you offer?",
+        "answer": {
+          "__TYPE__": "StructuredTextContent",
+          "value": [
+            {
+              "type": "paragraph",
+              "content": {
+                "text": "We offer comprehensive interior design services including space planning, color consultation, furniture selection, lighting design, window treatments, and full-room makeovers for residential and commercial spaces."
+              }
+            }
+          ]
+        }
+      },
+      {
+        "question": "How does the design process work?",
+        "answer": {
+          "__TYPE__": "StructuredTextContent",
+          "value": [
+            {
+              "type": "paragraph",
+              "content": {
+                "text": "Our process begins with an initial consultation to understand your style, needs, and budget. We then create design concepts, present mood boards and 3D renderings, and guide you through implementation from furniture selection to final styling."
+              }
+            }
+          ]
+        }
+      },
+      {
+        "question": "Do you work within specific budgets?",
+        "answer": {
+          "__TYPE__": "StructuredTextContent",
+          "value": [
+            {
+              "type": "paragraph",
+              "content": {
+                "text": "Absolutely! We work with a variety of budgets and will create a design plan that maximizes your investment. During our consultation, we'll discuss your budget and tailor our recommendations accordingly."
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
