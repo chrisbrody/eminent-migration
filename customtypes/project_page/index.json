@@ -101,6 +101,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "image_gallery": {
+              "type": "SharedSlice"
+            },
             "rich_text_content": {
               "type": "SharedSlice"
             },

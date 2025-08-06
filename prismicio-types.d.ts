@@ -193,7 +193,10 @@ export type MainNavigationDocument<Lang extends string = string> =
     Lang
   >;
 
-type ProjectPageDocumentDataSlicesSlice = RichTextContentSlice | HeroSlice;
+type ProjectPageDocumentDataSlicesSlice =
+  | ImageGallerySlice
+  | RichTextContentSlice
+  | HeroSlice;
 
 /**
  * Content for Project Page documents
@@ -840,6 +843,61 @@ type HeroSliceVariation = HeroSliceDefault | HeroSliceTextCentered;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
+ * Primary content in *ImageGallery → Items*
+ */
+export interface ImageGallerySliceDefaultItem {
+  /**
+   * Gallery Image field in *ImageGallery → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_gallery.items[].gallery_image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  gallery_image: prismic.ImageField<never>;
+
+  /**
+   * Caption field in *ImageGallery → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Optional image caption
+   * - **API ID Path**: image_gallery.items[].caption
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  caption: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for ImageGallery Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageGallerySliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  Simplify<ImageGallerySliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *ImageGallery*
+ */
+type ImageGallerySliceVariation = ImageGallerySliceDefault;
+
+/**
+ * ImageGallery Shared Slice
+ *
+ * - **API ID**: `image_gallery`
+ * - **Description**: Image Gallery
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageGallerySlice = prismic.SharedSlice<
+  "image_gallery",
+  ImageGallerySliceVariation
+>;
+
+/**
  * Primary content in *Rich Text Content → Default → Primary*
  */
 export interface RichTextContentSliceDefaultPrimary {
@@ -971,6 +1029,10 @@ declare module "@prismicio/client" {
       HeroSliceVariation,
       HeroSliceDefault,
       HeroSliceTextCentered,
+      ImageGallerySlice,
+      ImageGallerySliceDefaultItem,
+      ImageGallerySliceVariation,
+      ImageGallerySliceDefault,
       RichTextContentSlice,
       RichTextContentSliceDefaultPrimary,
       RichTextContentSliceVariation,
