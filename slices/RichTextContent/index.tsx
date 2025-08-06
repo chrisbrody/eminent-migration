@@ -10,6 +10,11 @@ export type RichTextContentProps = SliceComponentProps<Content.RichTextContentSl
  * Component for "RichTextContent" Slices.
  */
 const RichTextContent = ({ slice }: RichTextContentProps) => {
+  // Safe access to slice fields with null checks
+  if (!slice?.primary) {
+    return <div>No content available</div>;
+  }
+
   // Get styling options with safe access and proper typing
   const alignment = slice.primary.text_alignment || 'left';
   const textSize = slice.primary.text_size || 'medium';
@@ -25,9 +30,9 @@ const RichTextContent = ({ slice }: RichTextContentProps) => {
   const alignmentClass = alignmentClasses[alignment as keyof typeof alignmentClasses] || alignmentClasses.left;
 
   const sizeClasses = {
-    small: 'prose-sm',
-    medium: 'prose-lg',
-    large: 'prose-xl'
+    small: 'text-sm',
+    medium: 'text-base',
+    large: 'text-lg'
   };
   const sizeClass = sizeClasses[textSize as keyof typeof sizeClasses] || sizeClasses.medium;
 
@@ -47,8 +52,12 @@ const RichTextContent = ({ slice }: RichTextContentProps) => {
       className={`py-12 px-4 sm:px-6 lg:px-8 ${backgroundClass}`}
     >
       <div className="max-w-4xl mx-auto">
-        <div className={`prose ${sizeClass} max-w-none ${alignmentClass}`}>
-          <PrismicRichText field={slice.primary.content} />
+        <div className={`${sizeClass} ${alignmentClass} space-y-4`}>
+          {slice.primary.content ? (
+            <PrismicRichText field={slice.primary.content} />
+          ) : (
+            <p>Add content to this Rich Text slice...</p>
+          )}
         </div>
       </div>
     </section>
