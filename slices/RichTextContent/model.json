@@ -62,6 +62,20 @@
             ],
             "default_value": "none"
           }
+        },
+        "padding": {
+          "type": "Text",
+          "config": {
+            "label": "Padding",
+            "placeholder": "e.g., 2rem, 1rem 2rem, 1rem 2rem 1rem 2rem, 0"
+          }
+        },
+        "margin": {
+          "type": "Text",
+          "config": {
+            "label": "Margin",
+            "placeholder": "e.g., 2rem auto, 1rem 0, 50px 25px, 0"
+          }
         }
       },
       "items": {}

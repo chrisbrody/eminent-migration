@@ -31,15 +31,15 @@ const FAQ = ({ slice }: FAQProps) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="py-16 bg-background"
+      className="bg-background section-padding-y"
       aria-labelledby="faq-heading"
     >
-      <div className="container mx-auto max-w-2xl flex flex-col gap-10 md:gap-12 px-6">
+      <div className="container-padding-x mx-auto flex max-w-2xl flex-col gap-10 md:gap-12">
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center gap-6">
+        <div className="section-title-gap-lg flex flex-col items-center text-center">
           {/* Tagline */}
           {slice.primary.tagline && (
-            <Tagline>{slice.primary.tagline}</Tagline>
+            <Tagline variant="ghost">{slice.primary.tagline}</Tagline>
           )}
           
           {/* Main Title */}
@@ -48,17 +48,17 @@ const FAQ = ({ slice }: FAQProps) => {
               field={slice.primary.title}
               components={{
                 heading1: ({ children }) => (
-                  <h1 id="faq-heading" className="text-3xl lg:text-4xl font-bold text-foreground">
+                  <h1 id="faq-heading" className="heading-lg text-foreground">
                     {children}
                   </h1>
                 ),
                 heading2: ({ children }) => (
-                  <h2 id="faq-heading" className="text-3xl lg:text-4xl font-bold text-foreground">
+                  <h2 id="faq-heading" className="heading-lg text-foreground">
                     {children}
                   </h2>
                 ),
                 heading3: ({ children }) => (
-                  <h3 id="faq-heading" className="text-2xl lg:text-3xl font-bold text-foreground">
+                  <h3 id="faq-heading" className="heading-lg text-foreground">
                     {children}
                   </h3>
                 ),
@@ -100,7 +100,7 @@ const FAQ = ({ slice }: FAQProps) => {
             <div key={index} className="border-b border-gray-200">
               <button
                 onClick={() => toggleItem(index)}
-                className="w-full text-left py-4 flex items-center justify-between hover:no-underline bg-white border-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="w-full text-left py-4 flex items-center justify-between hover:no-underline bg-white border-none focus:outline-none"
                 aria-expanded={openItem === index}
                 aria-controls={`faq-answer-${index}`}
               >

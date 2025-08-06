@@ -98,3 +98,79 @@ body {
   color: hsl(var(--foreground));
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Storybook component styles */
+.section-padding-y {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 1024px) {
+  .section-padding-y {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+.container-padding-x {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-padding-x {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-padding-x {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.heading-lg {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+@media (min-width: 640px) {
+  .heading-lg {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heading-lg {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+
+.section-title-gap-lg {
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .section-title-gap-lg {
+    gap: 1.5rem;
+  }
+}
+
+/* Heading dynamic color classes to match storybook styles */
+.heading-dynamic-default {
+  color: var(--heading-default-color) !important;
+}
+
+.heading-dynamic-primary {
+  color: var(--heading-primary-color) !important;
+}
+
+.heading-dynamic-muted {
+  color: var(--heading-muted-color) !important;
+}
