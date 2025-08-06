@@ -10,7 +10,7 @@
       "docURL": "...",
       "version": "initial",
       "description": "Default",
-      "imageUrl": "",
+      "imageUrl": "./screenshot-default.png",
       "primary": {
         "title": {
           "type": "StructuredText",
@@ -62,7 +62,7 @@
       "docURL": "...",
       "version": "initial",
       "description": "Hero with centered text layout",
-      "imageUrl": "",
+      "imageUrl": "./screenshot-textCentered.png",
       "primary": {
         "title": {
           "type": "StructuredText",

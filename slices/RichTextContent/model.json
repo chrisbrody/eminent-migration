@@ -10,7 +10,7 @@
       "docURL": "...",
       "version": "initial",
       "description": "Default rich text content block",
-      "imageUrl": "",
+      "imageUrl": "./screenshot-default.png",
       "primary": {
         "content": {
           "type": "StructuredText",

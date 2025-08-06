@@ -34,9 +34,6 @@
           "choices": {
             "hero": {
               "type": "SharedSlice"
-            },
-            "rich_text_content": {
-              "type": "SharedSlice"
             }
           }
         }

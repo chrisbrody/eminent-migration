@@ -442,7 +442,7 @@ export type ServicePageDocument<Lang extends string = string> =
     Lang
   >;
 
-type StandardPageDocumentDataSlicesSlice = HeroSlice | RichTextContentSlice;
+type StandardPageDocumentDataSlicesSlice = HeroSlice;
 
 /**
  * Content for Standard Page documents
