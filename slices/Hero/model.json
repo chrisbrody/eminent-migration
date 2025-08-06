@@ -52,6 +52,14 @@
             "placeholder": "Select a page or enter URL",
             "allowTargetBlank": true
           }
+        },
+        "overlay_opacity": {
+          "type": "Select",
+          "config": {
+            "label": "Overlay Opacity",
+            "placeholder": "Choose overlay darkness",
+            "options": ["none", "light", "medium", "dark"]
+          }
         }
       },
       "items": {}
@@ -103,6 +111,14 @@
             "label": "CTA Button Link",
             "placeholder": "Select a page or enter URL",
             "allowTargetBlank": true
+          }
+        },
+        "overlay_opacity": {
+          "type": "Select",
+          "config": {
+            "label": "Overlay Opacity",
+            "placeholder": "Choose overlay darkness",
+            "options": ["none", "light", "medium", "dark"]
           }
         }
       },
