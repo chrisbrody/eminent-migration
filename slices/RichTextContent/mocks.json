@@ -5,14 +5,7 @@
 		"primary": {
 			"content": {
 				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Transform Your Space"
-						}
-					}
-				]
+				"value": []
 			},
 			"text_alignment": {
 				"__TYPE__": "FieldContent",
