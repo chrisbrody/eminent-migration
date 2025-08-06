@@ -1,4 +1,4 @@
-import { Content } from "@prismicio/client";
+import { Content, asText } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 
 /**
@@ -21,7 +21,7 @@ const RichTextContent = ({ slice }: RichTextContentProps) => {
       }}
     >
       <h2>Rich Text Content Slice</h2>
-      <p>Content: {slice.primary?.content?.[0]?.text || "No content"}</p>
+      <p>Content: {asText(slice.primary.content) || "No content"}</p>
     </section>
   );
 };
