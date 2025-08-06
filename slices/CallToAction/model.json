@@ -1,0 +1,95 @@
+{
+  "id": "call_to_action",
+  "type": "SharedSlice",
+  "name": "Call To Action",
+  "description": "A reusable CTA block to be placed strategically on various pages.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default CTA block",
+      "imageUrl": "./screenshot-default.png",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "Enter your CTA title...",
+            "allowTargetBlank": true,
+            "single": "heading1,heading2,heading3,heading4,heading5,heading6"
+          }
+        },
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Text",
+            "placeholder": "Enter your CTA description...",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,strong,em,hyperlink,list-item,o-list-item"
+          }
+        },
+        "button_label": {
+          "type": "Text",
+          "config": {
+            "label": "Button Label",
+            "placeholder": "e.g., Get Started, Learn More, Contact Us"
+          }
+        },
+        "button_link": {
+          "type": "Link",
+          "config": {
+            "label": "Button Link",
+            "placeholder": "Select a page or enter URL",
+            "allowTargetBlank": true,
+            "select": null
+          }
+        },
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "Choose background",
+            "options": [
+              "white",
+              "light-gray",
+              "dark-gray",
+              "primary",
+              "secondary"
+            ],
+            "default_value": "primary"
+          }
+        },
+        "text_alignment": {
+          "type": "Select",
+          "config": {
+            "label": "Text Alignment",
+            "placeholder": "Choose alignment",
+            "options": [
+              "left",
+              "center",
+              "right"
+            ],
+            "default_value": "center"
+          }
+        },
+        "padding": {
+          "type": "Text",
+          "config": {
+            "label": "Padding",
+            "placeholder": "e.g., 4rem 2rem, 3rem, 48px 24px, 0"
+          }
+        },
+        "margin": {
+          "type": "Text",
+          "config": {
+            "label": "Margin",
+            "placeholder": "e.g., 2rem auto, 1rem 0, 32px 0, 0"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

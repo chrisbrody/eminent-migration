@@ -194,6 +194,7 @@ export type MainNavigationDocument<Lang extends string = string> =
   >;
 
 type ProjectPageDocumentDataSlicesSlice =
+  | CallToActionSlice
   | FaqSlice
   | ImageGallerySlice
   | RichTextContentSlice
@@ -662,6 +663,132 @@ export type AllDocumentTypes =
   | TestimonialDocument;
 
 /**
+ * Primary content in *Call To Action → Default → Primary*
+ */
+export interface CallToActionSliceDefaultPrimary {
+  /**
+   * Title field in *Call To Action → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter your CTA title...
+   * - **API ID Path**: call_to_action.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Text field in *Call To Action → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter your CTA description...
+   * - **API ID Path**: call_to_action.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
+
+  /**
+   * Button Label field in *Call To Action → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g., Get Started, Learn More, Contact Us
+   * - **API ID Path**: call_to_action.default.primary.button_label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  button_label: prismic.KeyTextField;
+
+  /**
+   * Button Link field in *Call To Action → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: Select a page or enter URL
+   * - **API ID Path**: call_to_action.default.primary.button_link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  button_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * Background Color field in *Call To Action → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Choose background
+   * - **Default Value**: primary
+   * - **API ID Path**: call_to_action.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  background_color: prismic.SelectField<
+    "white" | "light-gray" | "dark-gray" | "primary" | "secondary",
+    "filled"
+  >;
+
+  /**
+   * Text Alignment field in *Call To Action → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Choose alignment
+   * - **Default Value**: center
+   * - **API ID Path**: call_to_action.default.primary.text_alignment
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  text_alignment: prismic.SelectField<"left" | "center" | "right", "filled">;
+
+  /**
+   * Padding field in *Call To Action → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g., 4rem 2rem, 3rem, 48px 24px, 0
+   * - **API ID Path**: call_to_action.default.primary.padding
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  padding: prismic.KeyTextField;
+
+  /**
+   * Margin field in *Call To Action → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g., 2rem auto, 1rem 0, 32px 0, 0
+   * - **API ID Path**: call_to_action.default.primary.margin
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  margin: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Call To Action Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default CTA block
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CallToActionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CallToActionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Call To Action*
+ */
+type CallToActionSliceVariation = CallToActionSliceDefault;
+
+/**
+ * Call To Action Shared Slice
+ *
+ * - **API ID**: `call_to_action`
+ * - **Description**: A reusable CTA block to be placed strategically on various pages.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type CallToActionSlice = prismic.SharedSlice<
+  "call_to_action",
+  CallToActionSliceVariation
+>;
+
+/**
  * Primary content in *FAQ → Default → Primary*
  */
 export interface FaqSliceDefaultPrimary {
@@ -713,7 +840,13 @@ export interface FaqSliceDefaultPrimary {
    * - **API ID Path**: faq.default.primary.contact_link
    * - **Documentation**: https://prismic.io/docs/fields/link
    */
-  contact_link: prismic.LinkField;
+  contact_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
 }
 
 /**
@@ -1057,6 +1190,26 @@ export interface RichTextContentSliceDefaultPrimary {
     "none" | "light-gray" | "dark-gray" | "blue" | "white",
     "filled"
   >;
+
+  /**
+   * Padding field in *Rich Text Content → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g., 2rem, 1rem 2rem, 1rem 2rem 1rem 2rem, 0
+   * - **API ID Path**: rich_text_content.default.primary.padding
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  padding: prismic.KeyTextField;
+
+  /**
+   * Margin field in *Rich Text Content → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: e.g., 2rem auto, 1rem 0, 50px 25px, 0
+   * - **API ID Path**: rich_text_content.default.primary.margin
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  margin: prismic.KeyTextField;
 }
 
 /**
@@ -1131,6 +1284,10 @@ declare module "@prismicio/client" {
       TestimonialDocument,
       TestimonialDocumentData,
       AllDocumentTypes,
+      CallToActionSlice,
+      CallToActionSliceDefaultPrimary,
+      CallToActionSliceVariation,
+      CallToActionSliceDefault,
       FaqSlice,
       FaqSliceDefaultPrimary,
       FaqSliceDefaultItem,

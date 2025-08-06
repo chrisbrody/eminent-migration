@@ -1,0 +1,33 @@
+[
+  {
+    "variation": "default",
+    "name": "Default",
+    "slice_type": "call_to_action",
+    "items": [],
+    "primary": {
+      "title": [
+        {
+          "type": "heading2",
+          "text": "Ready to Transform Your Space?",
+          "spans": []
+        }
+      ],
+      "text": [
+        {
+          "type": "paragraph",
+          "text": "Our expert interior designers are here to help you create the perfect space that reflects your style and meets your needs. Let's start your design journey today.",
+          "spans": []
+        }
+      ],
+      "button_label": "Schedule a Consultation",
+      "button_link": {
+        "link_type": "Web",
+        "url": "/contact"
+      },
+      "background_color": "primary",
+      "text_alignment": "center",
+      "padding": "4rem 2rem",
+      "margin": "0"
+    }
+  }
+]
