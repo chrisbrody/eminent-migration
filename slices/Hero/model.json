@@ -50,7 +50,8 @@
           "config": {
             "label": "CTA Button Link",
             "placeholder": "Select a page or enter URL",
-            "allowTargetBlank": true
+            "allowTargetBlank": true,
+            "select": null
           }
         },
         "overlay_opacity": {
@@ -58,7 +59,12 @@
           "config": {
             "label": "Overlay Opacity",
             "placeholder": "Choose overlay darkness",
-            "options": ["none", "light", "medium", "dark"]
+            "options": [
+              "none",
+              "light",
+              "medium",
+              "dark"
+            ]
           }
         }
       },
@@ -110,7 +116,8 @@
           "config": {
             "label": "CTA Button Link",
             "placeholder": "Select a page or enter URL",
-            "allowTargetBlank": true
+            "allowTargetBlank": true,
+            "select": null
           }
         },
         "overlay_opacity": {
@@ -118,7 +125,12 @@
           "config": {
             "label": "Overlay Opacity",
             "placeholder": "Choose overlay darkness",
-            "options": ["none", "light", "medium", "dark"]
+            "options": [
+              "none",
+              "light",
+              "medium",
+              "dark"
+            ]
           }
         }
       },

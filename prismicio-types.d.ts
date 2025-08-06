@@ -716,6 +716,16 @@ export interface HeroSliceDefaultPrimary {
     prismic.FieldState,
     never
   >;
+
+  /**
+   * Overlay Opacity field in *Hero → Text Left → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Choose overlay darkness
+   * - **API ID Path**: hero.default.primary.overlay_opacity
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  overlay_opacity: prismic.SelectField<"none" | "light" | "medium" | "dark">;
 }
 
 /**
@@ -790,6 +800,16 @@ export interface HeroSliceTextCenteredPrimary {
     prismic.FieldState,
     never
   >;
+
+  /**
+   * Overlay Opacity field in *Hero → Text Centered → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: Choose overlay darkness
+   * - **API ID Path**: hero.textCentered.primary.overlay_opacity
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  overlay_opacity: prismic.SelectField<"none" | "light" | "medium" | "dark">;
 }
 
 /**

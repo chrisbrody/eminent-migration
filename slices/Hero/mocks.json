@@ -1,72 +1,152 @@
 [
-  {
-    "__TYPE__": "SharedSliceContent",
-    "variation": "default",
-    "primary": {
-      "title": [
-        {
-          "type": "heading1",
-          "text": "Transform Your Space with Expert Interior Design",
-          "spans": []
-        }
-      ],
-      "subtitle": [
-        {
-          "type": "paragraph",
-          "text": "Creating beautiful, functional spaces that reflect your unique style and enhance your daily life. From concept to completion, we guide you through every step of your design journey.",
-          "spans": []
-        }
-      ],
-      "background_image": {
-        "dimensions": {
-          "width": 2400,
-          "height": 1260
-        },
-        "alt": "Beautiful interior design hero image",
-        "copyright": null,
-        "url": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2400&q=80"
-      },
-      "cta_button_label": "Start Your Project",
-      "cta_button_link": {
-        "link_type": "Web",
-        "url": "/contact"
-      }
-    },
-    "items": []
-  },
-  {
-    "__TYPE__": "SharedSliceContent",
-    "variation": "textCentered",
-    "primary": {
-      "title": [
-        {
-          "type": "heading1",
-          "text": "Award-Winning Interior Design",
-          "spans": []
-        }
-      ],
-      "subtitle": [
-        {
-          "type": "paragraph",
-          "text": "Bringing your vision to life with innovative design solutions and exceptional craftsmanship.",
-          "spans": []
-        }
-      ],
-      "background_image": {
-        "dimensions": {
-          "width": 2400,
-          "height": 1260
-        },
-        "alt": "Elegant living room interior",
-        "copyright": null,
-        "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2400&q=80"
-      },
-      "cta_button_label": "View Our Portfolio",
-      "cta_button_link": {
-        "link_type": "Web",
-        "url": "/projects"
-      }
-    },
-    "items": []
-  }
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Someone"
+						}
+					}
+				]
+			},
+			"subtitle": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Duis occaecat ut consectetur occaecat do do aliqua duis fugiat officia exercitation amet."
+						}
+					}
+				]
+			},
+			"background_image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68",
+					"width": 8640,
+					"height": 8640
+				},
+				"url": "https://images.unsplash.com/photo-1593642532973-d31b6557fa68",
+				"width": 8640,
+				"height": 8640,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "pen",
+				"credits": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"cta_button_label": {
+				"__TYPE__": "FieldContent",
+				"value": "sick",
+				"type": "Text"
+			},
+			"cta_button_link": {
+				"key": "88f88fe1-ca68-4031-a8b9-b5799daef9af",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io"
+				}
+			},
+			"overlay_opacity": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "textCentered",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Recall"
+						}
+					}
+				]
+			},
+			"subtitle": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Eiusmod nisi excepteur voluptate ea tempor ut ullamco ea veniam tempor ad."
+						}
+					}
+				]
+			},
+			"background_image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1606248897732-2c5ffe759c04",
+					"width": 4000,
+					"height": 4000
+				},
+				"url": "https://images.unsplash.com/photo-1606248897732-2c5ffe759c04",
+				"width": 4000,
+				"height": 4000,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "north",
+				"credits": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"cta_button_label": {
+				"__TYPE__": "FieldContent",
+				"value": "travel",
+				"type": "Text"
+			},
+			"cta_button_link": {
+				"key": "c6f2e3fa-a7b5-4e8b-8fd5-64a915b9a5af",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://google.com"
+				}
+			},
+			"overlay_opacity": {
+				"__TYPE__": "FieldContent",
+				"value": "light",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
 ]
