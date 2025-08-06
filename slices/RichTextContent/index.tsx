@@ -1,5 +1,5 @@
-import { Content, asText } from "@prismicio/client";
-import { SliceComponentProps } from "@prismicio/react";
+import { Content } from "@prismicio/client";
+import { SliceComponentProps, PrismicRichText } from "@prismicio/react";
 
 /**
  * Props for `RichTextContent`.
@@ -14,14 +14,13 @@ const RichTextContent = ({ slice }: RichTextContentProps) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      style={{
-        padding: "2rem",
-        backgroundColor: "#ffffff",
-        minHeight: "100px"
-      }}
+      className={`text-${slice.primary.text_alignment} text-${slice.primary.text_size} ${
+        slice.primary.background_color !== 'none' ? `bg-${slice.primary.background_color}` : ''
+      }`}
     >
-      <h2>Rich Text Content Slice</h2>
-      <p>Content: {asText(slice.primary.content) || "No content"}</p>
+      <div className="prose prose-lg max-w-none">
+        <PrismicRichText field={slice.primary.content} />
+      </div>
     </section>
   );
 };
