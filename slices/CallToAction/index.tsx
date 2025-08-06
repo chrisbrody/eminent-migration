@@ -23,12 +23,17 @@ const CallToAction = ({ slice }: CallToActionProps) => {
     dynamicStyles.margin = primary.margin;
   }
   
+  // Add specific background color for primary
+  if (slice.primary.background_color === 'primary') {
+    dynamicStyles.backgroundColor = '#1a1a1a';
+  }
+  
   // Background color mapping
   const backgroundClasses = {
     white: 'bg-white text-foreground',
     'light-gray': 'bg-gray-100 text-foreground',
     'dark-gray': 'bg-gray-800 text-white',
-    primary: 'bg-gray-900 text-white',
+    primary: 'text-white',
     secondary: 'bg-secondary text-secondary-foreground'
   };
   
