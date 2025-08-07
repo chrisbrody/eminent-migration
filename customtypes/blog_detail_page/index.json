@@ -66,6 +66,15 @@
           "placeholder": ""
         }
       },
+      "featured_blog": {
+        "type": "Boolean",
+        "config": {
+          "label": "Featured Blog",
+          "placeholder_false": "Regular Blog",
+          "placeholder_true": "Featured Blog",
+          "default_value": false
+        }
+      },
       "owner": {
         "type": "Link",
         "config": {
