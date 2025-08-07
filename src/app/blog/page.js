@@ -111,7 +111,15 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Blog Section Header */}
-      <div className="container mx-auto px-5 py-24">
+      <div className="container mx-auto px-4 py-8">
+        {/* Back button */}
+        <Link 
+          href="/"
+          className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-8"
+        >
+          ← Back to Home
+        </Link>
+        
         <div className="flex flex-col gap-10 md:gap-12 items-center">
           {/* Section Title */}
           <div className="flex flex-col max-w-xl mx-auto items-center text-center">

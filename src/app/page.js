@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 export default function Home() {
   return (
@@ -9,19 +10,17 @@ export default function Home() {
           Minneapolis Interior Designers specializing in custom home design and remodeling
         </p>
         
-        <div className="space-x-4">
-          <Link 
-            href="/blog" 
-            className="inline-block border border-blue-600 text-blue-600 px-8 py-3 rounded-lg text-lg hover:bg-blue-50 transition-colors"
-          >
-            Blog
-          </Link>
-          <Link 
-            href="/projects" 
-            className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg text-lg hover:bg-blue-700 transition-colors"
-          >
-            Projects
-          </Link>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button variant="secondary" size="lg" asChild>
+            <Link href="/blog">
+              Blog
+            </Link>
+          </Button>
+          <Button size="lg" asChild>
+            <Link href="/projects">
+              Projects
+            </Link>
+          </Button>
         </div>
       </div>
       
