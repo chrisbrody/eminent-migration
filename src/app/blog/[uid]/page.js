@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { SliceZone } from '@prismicio/react'
 import { components } from '../../../../slices'
+import { Tagline } from '../../../components/ui/tagline'
 
 export default async function BlogPage({ params }) {
   const { uid } = await params
@@ -28,7 +29,7 @@ export default async function BlogPage({ params }) {
     })
     
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="min-h-screen bg-white">
         {/* Preview indicator */}
         {isEnabled && (
           <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6">
@@ -37,102 +38,113 @@ export default async function BlogPage({ params }) {
           </div>
         )}
         
-        {/* Back button */}
-        <Link 
-          href="/blog"
-          className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6"
-        >
-          ← Back to Blog
-        </Link>
-        
-        {/* Featured Image */}
-        {blog.data.featured_image?.url && (
-          <div className="relative w-full h-96 mb-8 rounded-lg overflow-hidden">
-            <Image
-              src={blog.data.featured_image.url}
-              alt={blog.data.featured_image.alt || blog.data.headline}
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-        )}
-        
-        {/* Blog Header */}
-        <div className="mb-8">
-          {/* Tagline */}
-          {blog.data.tagline && (
-            <div className="mb-4">
-              <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                {blog.data.tagline}
-              </span>
-            </div>
-          )}
-          
-          <h1 className="text-4xl font-bold mb-4">{blog.data.headline}</h1>
-          
-          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-6">
-            {blog.data.date && (
-              <div>
-                <strong>Published:</strong> {new Date(blog.data.date).toLocaleDateString()}
-              </div>
-            )}
-            {blog.data.time_to_read && (
-              <div>
-                <strong>Read time:</strong> {blog.data.time_to_read} min
-              </div>
-            )}
-            {blog.data.owner?.data && (
-              <div className="flex items-center gap-2">
-                <strong>Author:</strong>
-                {blog.data.owner.data.owner_image?.url && (
-                  <Image
-                    src={blog.data.owner.data.owner_image.url}
-                    alt={blog.data.owner.data.owner_name}
-                    width={24}
-                    height={24}
-                    className="rounded-full"
-                  />
+        <section className="bg-background py-16 md:py-24 w-full">
+          <div className="mx-auto max-w-3xl px-6 w-full">
+            <article className="flex flex-col gap-12 md:gap-16 w-full">
+              {/* Back button */}
+              <Link 
+                href="/blog"
+                className="inline-flex items-center text-blue-600 hover:text-blue-800 -mt-8 mb-4"
+              >
+                ← Back to Blog
+              </Link>
+
+              <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-4 md:gap-5">
+                  {/* Date and Category */}
+                  <div className="flex items-center gap-2 flex-wrap">
+                    {blog.data.date && (
+                      <p className="text-muted-foreground text-sm">
+                        {new Date(blog.data.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: '2-digit',
+                          day: '2-digit'
+                        })}
+                      </p>
+                    )}
+                    {blog.data.date && blog.data.tagline && (
+                      <span className="text-muted-foreground text-sm">·</span>
+                    )}
+                    {blog.data.tagline && (
+                      <Tagline variant="ghost">
+                        {blog.data.tagline}
+                      </Tagline>
+                    )}
+                  </div>
+
+                  {/* Title */}
+                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+                    {blog.data.headline}
+                  </h1>
+
+                  {/* Description with read time */}
+                  {blog.data.short_description && (
+                    <p className="text-muted-foreground text-lg leading-relaxed">
+                      {blog.data.time_to_read && `${blog.data.time_to_read} min read - `}
+                      {blog.data.short_description.map((block, index) => block.text).join(' ')}
+                    </p>
+                  )}
+                </div>
+
+                {/* Author */}
+                {blog.data.owner?.data && (
+                  <div className="flex items-center gap-4">
+                    {blog.data.owner.data.owner_image?.url && (
+                      <div className="h-10 w-10 rounded-full overflow-hidden">
+                        <Image
+                          src={blog.data.owner.data.owner_image.url}
+                          alt={blog.data.owner.data.owner_name}
+                          width={40}
+                          height={40}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-col">
+                      <p className="text-sm font-medium">{blog.data.owner.data.owner_name}</p>
+                      {blog.data.owner.data.owner_title && (
+                        <p className="text-muted-foreground text-sm">
+                          {blog.data.owner.data.owner_title}
+                        </p>
+                      )}
+                    </div>
+                  </div>
                 )}
-                <span>{blog.data.owner.data.owner_name}</span>
-                {blog.data.owner.data.owner_title && (
-                  <span className="text-gray-500">({blog.data.owner.data.owner_title})</span>
+
+                {/* Featured Image */}
+                {blog.data.featured_image?.url && (
+                  <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden">
+                    <Image
+                      src={blog.data.featured_image.url}
+                      alt={blog.data.featured_image.alt || blog.data.headline}
+                      fill
+                      className="h-full w-full object-cover"
+                      priority
+                    />
+                  </div>
                 )}
               </div>
-            )}
+
+              {/* Slice Zone Content */}
+              {blog.data.slices && blog.data.slices.length > 0 && (
+                <div className="flex flex-col gap-6">
+                  <SliceZone slices={blog.data.slices} components={components} />
+                </div>
+              )}
+
+              {/* Related Posts Section */}
+              <div className="mt-12 pt-8 border-t">
+                <h2 className="text-2xl font-semibold mb-6">More Blog Posts</h2>
+                <Link 
+                  href="/blog"
+                  className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  View All Posts
+                </Link>
+              </div>
+            </article>
           </div>
-        </div>
-        
-        {/* Short Description */}
-        {blog.data.short_description && (
-          <div className="prose prose-lg max-w-none mb-8">
-            <div className="text-xl text-gray-700 leading-relaxed border-l-4 border-blue-200 pl-6 mb-8">
-              {blog.data.short_description.map((block, index) => (
-                <p key={index} className="mb-4">
-                  {block.text}
-                </p>
-              ))}
-            </div>
-          </div>
-        )}
-        
-        {/* Slice Zone */}
-        {blog.data.slices && blog.data.slices.length > 0 && (
-          <div className="mb-8">
-            <SliceZone slices={blog.data.slices} components={components} />
-          </div>
-        )}
-        
-        {/* Related Posts Section */}
-        <div className="mt-12 pt-8 border-t">
-          <h2 className="text-2xl font-semibold mb-6">More Blog Posts</h2>
-          <Link 
-            href="/blog"
-            className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            View All Posts
-          </Link>
-        </div>
+        </section>
       </div>
     )
   } catch (error) {
