@@ -8,6 +8,7 @@ import { SliceZone } from '@prismicio/react'
 import { components } from '../../../../slices'
 import { Tagline } from '../../../components/ui/tagline'
 import { Button } from '../../../components/ui/button'
+import { generateBlogSchema } from '../../../lib/schema'
 
 export default function BlogPage() {
   const params = useParams()
@@ -17,6 +18,7 @@ export default function BlogPage() {
   const [loading, setLoading] = useState(true)
   const [, setRelatedLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [schema, setSchema] = useState(null)
 
   // Function to clean tagline (remove "Tips" from the end)
   const cleanTagline = (tagline) => {
@@ -36,6 +38,12 @@ export default function BlogPage() {
         }
         
         setBlog(data.blog)
+        
+        // Generate Schema.org markup
+        const currentUrl = `https://www.eminentinteriordesign.com/blog/${uid}`
+        const blogSchema = generateBlogSchema(data.blog, currentUrl)
+        setSchema(blogSchema)
+        
         setLoading(false)
         
         // Fetch related blogs if we have a tagline
@@ -60,6 +68,50 @@ export default function BlogPage() {
       fetchBlog()
     }
   }, [uid])
+
+  // Inject Schema.org markup into document head
+  useEffect(() => {
+    if (!schema) return
+
+    const schemaScript = document.createElement('script')
+    schemaScript.type = 'application/ld+json'
+    schemaScript.textContent = JSON.stringify(schema, null, 2)
+    schemaScript.id = 'blog-schema'
+
+    // Remove existing schema if present
+    const existingSchema = document.getElementById('blog-schema')
+    if (existingSchema) {
+      existingSchema.remove()
+    }
+
+    document.head.appendChild(schemaScript)
+
+    // Update document title and meta description
+    if (blog?.data?.headline) {
+      document.title = blog.data.headline
+      
+      let metaDescription = document.querySelector('meta[name="description"]')
+      if (!metaDescription) {
+        metaDescription = document.createElement('meta')
+        metaDescription.name = 'description'
+        document.head.appendChild(metaDescription)
+      }
+      
+      const description = blog.data.short_description 
+        ? blog.data.short_description.map(block => block.text).join(' ').slice(0, 160)
+        : blog.data.headline
+      
+      metaDescription.content = description
+    }
+
+    // Cleanup function
+    return () => {
+      const schemaToRemove = document.getElementById('blog-schema')
+      if (schemaToRemove) {
+        schemaToRemove.remove()
+      }
+    }
+  }, [schema, blog])
 
   if (loading) {
     return (
@@ -93,9 +145,9 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="bg-background py-16 md:py-24 w-full">
+        <section className="bg-background py-16 md:py-24 w-full">
         <div className="mx-auto max-w-3xl px-6 w-full">
-          <article className="flex flex-col gap-12 md:gap-16 w-full">
+          <article className="flex flex-col w-full">
             {/* Back button */}
             <Link 
               href="/blog"

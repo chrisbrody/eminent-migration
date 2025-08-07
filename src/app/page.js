@@ -11,17 +11,16 @@ export default function Home() {
         
         <div className="space-x-4">
           <Link 
-            href="/projects" 
-            className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg text-lg hover:bg-blue-700 transition-colors"
-          >
-            View Our Projects
-          </Link>
-          
-          <Link 
             href="/blog" 
             className="inline-block border border-blue-600 text-blue-600 px-8 py-3 rounded-lg text-lg hover:bg-blue-50 transition-colors"
           >
-            Our Blog
+            Blog
+          </Link>
+          <Link 
+            href="/projects" 
+            className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg text-lg hover:bg-blue-700 transition-colors"
+          >
+            Projects
           </Link>
         </div>
       </div>
