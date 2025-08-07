@@ -1,7 +1,6 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-import { useParams } from 'next/navigation'
+import { createClient } from '../../../../lib/prismic'
+import { notFound } from 'next/navigation'
+import { draftMode } from 'next/headers'
 import Image from 'next/image'
 import Link from 'next/link'
 import { SliceZone } from '@prismicio/react'
@@ -10,151 +9,87 @@ import { Tagline } from '../../../components/ui/tagline'
 import { Button } from '../../../components/ui/button'
 import { generateBlogSchema } from '../../../lib/schema'
 
-export default function BlogPage() {
-  const params = useParams()
-  const { uid } = params
-  const [blog, setBlog] = useState(null)
-  const [relatedBlogs, setRelatedBlogs] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [, setRelatedLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [schema, setSchema] = useState(null)
+// Function to clean tagline (remove "Tips" from the end)
+const cleanTagline = (tagline) => {
+  if (!tagline) return tagline
+  return tagline.replace(/\s+Tips$/i, '').trim()
+}
 
-  // Function to clean tagline (remove "Tips" from the end)
-  const cleanTagline = (tagline) => {
-    if (!tagline) return tagline
-    return tagline.replace(/\s+Tips$/i, '').trim()
-  }
-
-  // Fetch blog data
-  useEffect(() => {
-    const fetchBlog = async () => {
+export default async function BlogPage({ params }) {
+  const { uid } = await params
+  const { isEnabled } = await draftMode()
+  const client = createClient()
+  
+  // Debug logging
+  console.log('🔍 Draft mode enabled:', isEnabled)
+  console.log('🔍 Fetching blog UID:', uid)
+  
+  try {
+    // Fetch the blog post
+    const blog = await client.getByUID('blog_detail_page', uid, {
+      fetchOptions: isEnabled ? { cache: 'no-store' } : undefined
+    })
+    
+    console.log('🔍 Blog fetched:', {
+      id: blog.id,
+      headline: blog.data.headline,
+      lastModified: blog.last_publication_date
+    })
+    
+    // Fetch related blogs if we have a tagline
+    let relatedBlogs = []
+    if (blog.data.tagline) {
       try {
-        const response = await fetch(`/api/blog/${uid}`)
-        const data = await response.json()
+        const allBlogs = await client.getAllByType('blog_detail_page', {
+          fetchOptions: isEnabled ? { cache: 'no-store' } : undefined
+        })
         
-        if (!data.success) {
-          throw new Error(data.details || 'Failed to fetch blog')
-        }
-        
-        setBlog(data.blog)
-        
-        // Generate Schema.org markup
-        const currentUrl = `https://www.eminentinteriordesign.com/blog/${uid}`
-        const blogSchema = generateBlogSchema(data.blog, currentUrl)
-        setSchema(blogSchema)
-        
-        setLoading(false)
-        
-        // Fetch related blogs if we have a tagline
-        if (data.blog.data.tagline) {
-          setRelatedLoading(true)
-          const relatedResponse = await fetch(`/api/blogs/related?tagline=${encodeURIComponent(data.blog.data.tagline)}&exclude=${uid}`)
-          const relatedData = await relatedResponse.json()
-          
-          if (relatedData.success) {
-            setRelatedBlogs(relatedData.blogs)
-          }
-          setRelatedLoading(false)
-        }
-      } catch (err) {
-        console.error('Error fetching blog:', err)
-        setError(err)
-        setLoading(false)
+        // Filter related blogs by same tagline, excluding current blog
+        relatedBlogs = allBlogs
+          .filter(relatedBlog => 
+            relatedBlog.data.tagline === blog.data.tagline && 
+            relatedBlog.uid !== uid
+          )
+          .slice(0, 4)
+      } catch (error) {
+        console.error('Error fetching related blogs:', error)
       }
     }
+    
+    // Generate Schema.org markup
+    const currentUrl = `https://eminent-migration.vercel.app/blog/${uid}`
+    const blogSchema = generateBlogSchema(blog, currentUrl)
 
-    if (uid) {
-      fetchBlog()
-    }
-  }, [uid])
-
-  // Inject Schema.org markup into document head
-  useEffect(() => {
-    if (!schema) return
-
-    const schemaScript = document.createElement('script')
-    schemaScript.type = 'application/ld+json'
-    schemaScript.textContent = JSON.stringify(schema, null, 2)
-    schemaScript.id = 'blog-schema'
-
-    // Remove existing schema if present
-    const existingSchema = document.getElementById('blog-schema')
-    if (existingSchema) {
-      existingSchema.remove()
-    }
-
-    document.head.appendChild(schemaScript)
-
-    // Update document title and meta description
-    if (blog?.data?.headline) {
-      document.title = blog.data.headline
-      
-      let metaDescription = document.querySelector('meta[name="description"]')
-      if (!metaDescription) {
-        metaDescription = document.createElement('meta')
-        metaDescription.name = 'description'
-        document.head.appendChild(metaDescription)
-      }
-      
-      const description = blog.data.short_description 
-        ? blog.data.short_description.map(block => block.text).join(' ').slice(0, 160)
-        : blog.data.headline
-      
-      metaDescription.content = description
-    }
-
-    // Cleanup function
-    return () => {
-      const schemaToRemove = document.getElementById('blog-schema')
-      if (schemaToRemove) {
-        schemaToRemove.remove()
-      }
-    }
-  }, [schema, blog])
-
-  if (loading) {
     return (
       <div className="min-h-screen bg-white">
-        <div className="mx-auto max-w-3xl px-6 py-16">
-          <div className="text-center">
-            <p className="text-gray-600">Loading blog post...</p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  if (error || !blog) {
-    return (
-      <div className="min-h-screen bg-white">
-        <div className="mx-auto max-w-3xl px-6 py-16">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Blog Post Not Found</h1>
-            <p className="text-gray-600 mb-8">The blog post you&apos;re looking for doesn&apos;t exist.</p>
-            <Button asChild>
-              <Link href="/blog">
-                View All Posts
+        
+        <section className="bg-background py-4 md:py-8 w-full">
+          <div className="mx-auto max-w-3xl w-full">
+            <div className='pb-8'>
+              {/* Preview indicator */}
+              {isEnabled && (
+                <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6">
+                  <p className="font-bold">🎭 Preview Mode Active</p>
+                  <p className="text-sm">You are viewing draft content</p>
+                </div>
+              )}
+            </div>
+            <article className="flex flex-col w-full">
+              {/* Schema.org structured data */}
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                  __html: JSON.stringify(blogSchema),
+                }}
+              />
+              
+              {/* Back button */}
+              <Link 
+                href="/blog"
+                className="inline-flex items-center text-blue-600 hover:text-blue-800 -mt-8 mb-4"
+              >
+                ← Back to Blog
               </Link>
-            </Button>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <div className="min-h-screen bg-white">
-        <section className="bg-background py-16 md:py-24 w-full">
-        <div className="mx-auto max-w-3xl px-6 w-full">
-          <article className="flex flex-col w-full">
-            {/* Back button */}
-            <Link 
-              href="/blog"
-              className="inline-flex items-center text-blue-600 hover:text-blue-800 -mt-8 mb-4"
-            >
-              ← Back to Blog
-            </Link>
 
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-4 md:gap-5">
@@ -299,17 +234,57 @@ export default function BlogPage() {
               </div>
             )}
 
-            {/* View All Posts Section */}
-            <div className={relatedBlogs.length > 0 ? "pt-8 border-t" : "mt-12 pt-8 border-t"}>
-              <Button asChild>
-                <Link href="/blog">
-                  View All Posts
-                </Link>
-              </Button>
-            </div>
-          </article>
-        </div>
-      </section>
-    </div>
-  )
+              {/* View All Posts Section */}
+              <div className={relatedBlogs.length > 0 ? "pt-8 border-t" : "mt-12 pt-8 border-t"}>
+                <Button asChild>
+                  <Link href="/blog">
+                    View All Posts
+                  </Link>
+                </Button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    )
+  } catch (error) {
+    console.error('Error fetching blog:', error)
+    notFound()
+  }
+}
+
+// Generate metadata for SEO
+export async function generateMetadata({ params }) {
+  const { uid } = await params
+  const { isEnabled } = await draftMode()
+  const client = createClient()
+  
+  try {
+    const blog = await client.getByUID('blog_detail_page', uid, {
+      fetchOptions: isEnabled ? { cache: 'no-store' } : undefined
+    })
+    
+    const description = blog.data.short_description 
+      ? blog.data.short_description.map(block => block.text).join(' ').slice(0, 160)
+      : blog.data.headline
+    
+    return {
+      title: blog.data.headline,
+      description: description,
+      openGraph: {
+        title: blog.data.headline,
+        description: description,
+        images: blog.data.featured_image?.url ? [
+          {
+            url: blog.data.featured_image.url,
+            alt: blog.data.featured_image.alt || blog.data.headline,
+          }
+        ] : [],
+      },
+    }
+  } catch {
+    return {
+      title: 'Blog Post Not Found',
+    }
+  }
 }
