@@ -141,7 +141,7 @@ export async function generateMetadata({ params }) {
       title: project.data.project_title,
       description: project.data.project_description?.[0]?.text?.slice(0, 160) || `${project.data.project_title} - Interior Design Project`,
     }
-  } catch (error) {
+  } catch {
     return {
       title: 'Project Not Found',
     }
