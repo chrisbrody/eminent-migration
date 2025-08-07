@@ -69,6 +69,164 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
+type BlogDetailPageDocumentDataSlicesSlice =
+  | HeroSlice
+  | ImageGallerySlice
+  | RichTextContentSlice
+  | FaqSlice
+  | CallToActionSlice;
+
+/**
+ * Content for Blog Detail Page documents
+ */
+interface BlogDetailPageDocumentData {
+  /**
+   * Tagline field in *Blog Detail Page*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Bathroom Tips
+   * - **API ID Path**: blog_detail_page.tagline
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  tagline: prismic.SelectField<
+    | "Bathroom Tips"
+    | "Kitchen Tips"
+    | "Interior Tips"
+    | "Living Tips"
+    | "Modern Tips"
+    | "Tips",
+    "filled"
+  >;
+
+  /**
+   * Featured Image field in *Blog Detail Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_detail_page.featured_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  featured_image: prismic.ImageField<never>;
+
+  /**
+   * Headline field in *Blog Detail Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_detail_page.headline
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  headline: prismic.KeyTextField;
+
+  /**
+   * Short Description field in *Blog Detail Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_detail_page.short_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  short_description: prismic.RichTextField;
+
+  /**
+   * Date field in *Blog Detail Page*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_detail_page.date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/date
+   */
+  date: prismic.DateField;
+
+  /**
+   * Time to Read (minutes) field in *Blog Detail Page*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_detail_page.time_to_read
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  time_to_read: prismic.NumberField;
+
+  /**
+   * Owner field in *Blog Detail Page*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_detail_page.owner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  owner: ContentRelationshipFieldWithData<
+    [{ id: "owner"; fields: ["owner_image", "owner_name", "owner_title"] }]
+  >;
+
+  /**
+   * Slice Zone field in *Blog Detail Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_detail_page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<BlogDetailPageDocumentDataSlicesSlice> /**
+   * Meta Title field in *Blog Detail Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: blog_detail_page.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Blog Detail Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: blog_detail_page.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Blog Detail Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: blog_detail_page.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Blog Detail Page document from Prismic
+ *
+ * - **API ID**: `blog_detail_page`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type BlogDetailPageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<BlogDetailPageDocumentData>,
+    "blog_detail_page",
+    Lang
+  >;
+
 type BlogPageDocumentDataSlicesSlice =
   | CallToActionSlice
   | FaqSlice
@@ -827,6 +985,7 @@ export type TestimonialDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
+  | BlogDetailPageDocument
   | BlogPageDocument
   | HomepageDocument
   | MainNavigationDocument
@@ -1438,6 +1597,9 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      BlogDetailPageDocument,
+      BlogDetailPageDocumentData,
+      BlogDetailPageDocumentDataSlicesSlice,
       BlogPageDocument,
       BlogPageDocumentData,
       BlogPageDocumentDataSlicesSlice,

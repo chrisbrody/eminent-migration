@@ -18,10 +18,10 @@ export default function Home() {
           </Link>
           
           <Link 
-            href="/services" 
+            href="/blog" 
             className="inline-block border border-blue-600 text-blue-600 px-8 py-3 rounded-lg text-lg hover:bg-blue-50 transition-colors"
           >
-            Our Services
+            Our Blog
           </Link>
         </div>
       </div>

@@ -12,6 +12,12 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Building Locally
+You will need to run this command from time to time as the .next folder has issues fully deleting
+```bash
+Remove-Item -Force -Recurse .next
+```
+
 ## Slice Machine
 
 To start the slice machine locally

@@ -1,7 +1,7 @@
 {
   "format": "page",
-  "id": "blog_page",
-  "label": "Blog Page",
+  "id": "blog_detail_page",
+  "label": "Blog Detail Page",
   "repeatable": true,
   "status": true,
   "json": {
@@ -9,8 +9,7 @@
       "uid": {
         "type": "UID",
         "config": {
-          "label": "Blog Detail Slug",
-          "placeholder": ""
+          "label": "UID"
         }
       },
       "tagline": {
@@ -25,7 +24,8 @@
             "Living Tips",
             "Modern Tips",
             "Tips"
-          ]
+          ],
+          "default_value": "Bathroom Tips"
         }
       },
       "featured_image": {
@@ -49,7 +49,7 @@
           "label": "Short Description",
           "placeholder": "",
           "allowTargetBlank": true,
-          "multi": "paragraph,preformatted,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
       "date": {
@@ -71,7 +71,13 @@
         "config": {
           "label": "Owner",
           "select": "document",
-          "customtypes": ["owner"]
+          "repeat": false,
+          "customtypes": [
+            {
+              "id": "owner",
+              "fields": ["owner_image", "owner_name", "owner_title"]
+            }
+          ]
         }
       },
       "slices": {
@@ -79,10 +85,7 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "call_to_action": {
-              "type": "SharedSlice"
-            },
-            "faq": {
+            "hero": {
               "type": "SharedSlice"
             },
             "image_gallery": {
@@ -91,11 +94,41 @@
             "rich_text_content": {
               "type": "SharedSlice"
             },
-            "hero": {
+            "faq": {
+              "type": "SharedSlice"
+            },
+            "call_to_action": {
               "type": "SharedSlice"
             }
           }
         }
+      }
+    },
+    "SEO & Metadata": {
+      "meta_title": {
+        "config": {
+          "label": "Meta Title",
+          "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      },
+      "meta_description": {
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "A brief summary of the page"
+        },
+        "type": "Text"
+      },
+      "meta_image": {
+        "config": {
+          "constraint": {
+            "height": 1260,
+            "width": 2400
+          },
+          "label": "Meta Image",
+          "thumbnails": []
+        },
+        "type": "Image"
       }
     }
   }
