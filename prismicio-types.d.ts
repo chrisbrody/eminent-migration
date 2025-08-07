@@ -227,129 +227,6 @@ export type BlogDetailPageDocument<Lang extends string = string> =
     Lang
   >;
 
-type BlogPageDocumentDataSlicesSlice =
-  | CallToActionSlice
-  | FaqSlice
-  | ImageGallerySlice
-  | RichTextContentSlice
-  | HeroSlice;
-
-/**
- * Content for Blog Page documents
- */
-interface BlogPageDocumentData {
-  /**
-   * Tagline field in *Blog Page*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **API ID Path**: blog_page.tagline
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/select
-   */
-  tagline: prismic.SelectField<
-    | "Bathroom Tips"
-    | "Kitchen Tips"
-    | "Interior Tips"
-    | "Living Tips"
-    | "Modern Tips"
-    | "Tips"
-  >;
-
-  /**
-   * Featured Image field in *Blog Page*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: blog_page.featured_image
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  featured_image: prismic.ImageField<never>;
-
-  /**
-   * Headline field in *Blog Page*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: blog_page.headline
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  headline: prismic.KeyTextField;
-
-  /**
-   * Short Description field in *Blog Page*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: blog_page.short_description
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  short_description: prismic.RichTextField;
-
-  /**
-   * Date field in *Blog Page*
-   *
-   * - **Field Type**: Date
-   * - **Placeholder**: *None*
-   * - **API ID Path**: blog_page.date
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/date
-   */
-  date: prismic.DateField;
-
-  /**
-   * Time to Read (minutes) field in *Blog Page*
-   *
-   * - **Field Type**: Number
-   * - **Placeholder**: *None*
-   * - **API ID Path**: blog_page.time_to_read
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/number
-   */
-  time_to_read: prismic.NumberField;
-
-  /**
-   * Owner field in *Blog Page*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: blog_page.owner
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
-   */
-  owner: prismic.ContentRelationshipField<"owner">;
-
-  /**
-   * Slice Zone field in *Blog Page*
-   *
-   * - **Field Type**: Slice Zone
-   * - **Placeholder**: *None*
-   * - **API ID Path**: blog_page.slices[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/slices
-   */
-  slices: prismic.SliceZone<BlogPageDocumentDataSlicesSlice>;
-}
-
-/**
- * Blog Page document from Prismic
- *
- * - **API ID**: `blog_page`
- * - **Repeatable**: `true`
- * - **Documentation**: https://prismic.io/docs/content-modeling
- *
- * @typeParam Lang - Language API ID of the document.
- */
-export type BlogPageDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<BlogPageDocumentData>,
-    "blog_page",
-    Lang
-  >;
-
 type HomepageDocumentDataSlicesSlice = never;
 
 /**
@@ -986,7 +863,6 @@ export type TestimonialDocument<Lang extends string = string> =
 
 export type AllDocumentTypes =
   | BlogDetailPageDocument
-  | BlogPageDocument
   | HomepageDocument
   | MainNavigationDocument
   | OwnerDocument
@@ -1600,9 +1476,6 @@ declare module "@prismicio/client" {
       BlogDetailPageDocument,
       BlogDetailPageDocumentData,
       BlogDetailPageDocumentDataSlicesSlice,
-      BlogPageDocument,
-      BlogPageDocumentData,
-      BlogPageDocumentDataSlicesSlice,
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,

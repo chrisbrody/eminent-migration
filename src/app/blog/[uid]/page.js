@@ -16,7 +16,7 @@ export default async function BlogPage({ params }) {
   console.log('🔍 Fetching blog UID:', uid)
   
   try {
-    const blog = await client.getByUID('blog_page', uid, {
+    const blog = await client.getByUID('blog_detail_page', uid, {
       fetchOptions: isEnabled ? { cache: 'no-store' } : undefined
     })
     
@@ -148,7 +148,7 @@ export async function generateMetadata({ params }) {
   const client = createClient()
   
   try {
-    const blog = await client.getByUID('blog_page', uid, {
+    const blog = await client.getByUID('blog_detail_page', uid, {
       fetchOptions: isEnabled ? { cache: 'no-store' } : undefined
     })
     

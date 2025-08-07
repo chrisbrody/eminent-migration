@@ -12,9 +12,9 @@ export default async function BlogPage() {
   
   try {
     // Fetch all blog posts
-    const blogs = await client.getAllByType('blog_page', {
+    const blogs = await client.getAllByType('blog_detail_page', {
       orderings: [
-        { field: 'blog_page.date', direction: 'desc' }
+        { field: 'blog_detail_page.date', direction: 'desc' }
       ],
       fetchOptions: isEnabled ? { cache: 'no-store' } : undefined
     })
@@ -45,7 +45,7 @@ export default async function BlogPage() {
                 Inspired Design
               </h1>
               {/* Description */}
-              <p className="text-base text-gray-600">
+              <p className="text-base text-muted-foreground">
                 Dive Deeper
               </p>
             </div>
