@@ -2,6 +2,7 @@ import { createClient } from '../../../lib/prismic'
 import { draftMode } from 'next/headers'
 import Link from 'next/link'
 import Image from 'next/image'
+import { Button } from '../../components/ui/button'
 
 export default async function ProjectsPage() {
   const { isEnabled } = await draftMode()
@@ -64,12 +65,11 @@ export default async function ProjectsPage() {
                   </div>
                 )}
                 
-                <Link 
-                  href={`/projects/${project.uid}`}
-                  className="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-                >
-                  View Project
-                </Link>
+                <Button asChild>
+                  <Link href={`/projects/${project.uid}`}>
+                    View Project
+                  </Link>
+                </Button>
               </div>
             </div>
           ))}

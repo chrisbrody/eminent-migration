@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { SliceZone } from '@prismicio/react'
 import { components } from '../../../../slices'
+import { Button } from '../../../components/ui/button'
 
 export default async function ProjectPage({ params }) {
   const { uid } = await params
@@ -111,12 +112,11 @@ export default async function ProjectPage({ params }) {
         {/* Related Projects Section */}
         <div className="mt-12 pt-8 border-t">
           <h2 className="text-2xl font-semibold mb-6">More Projects</h2>
-          <Link 
-            href="/projects"
-            className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            View All Projects
-          </Link>
+          <Button asChild>
+            <Link href="/projects">
+              View All Projects
+            </Link>
+          </Button>
         </div>
       </div>
     )

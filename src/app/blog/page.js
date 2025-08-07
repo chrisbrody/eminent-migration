@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Tagline } from '../../components/ui/tagline'
+import { Button } from '../../components/ui/button'
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState([])
@@ -132,30 +133,26 @@ export default function BlogPage() {
           {availableTaglines.length > 0 && (
             <div className="flex flex-wrap gap-2 justify-center">
               {/* All button */}
-              <button
+              <Button
                 onClick={() => handleFilterToggle('All')}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${ 
-                  selectedFilters.includes('All')
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+                variant={selectedFilters.includes('All') ? 'primary' : 'secondary'}
+                size="sm"
+                className="cursor-pointer"
               >
                 All
-              </button>
+              </Button>
               
               {/* Category filter buttons */}
               {availableTaglines.map((tagline) => (
-                <button
+                <Button
                   key={tagline}
                   onClick={() => handleFilterToggle(tagline)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    selectedFilters.includes(tagline)
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
+                  variant={selectedFilters.includes(tagline) ? 'primary' : 'secondary'}
+                  size="sm"
+                  className="cursor-pointer"
                 >
                   {cleanTagline(tagline)}
-                </button>
+                </Button>
               ))}
             </div>
           )}

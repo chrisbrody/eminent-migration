@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { SliceZone } from '@prismicio/react'
 import { components } from '../../../../slices'
 import { Tagline } from '../../../components/ui/tagline'
+import { Button } from '../../../components/ui/button'
 
 export default async function BlogPage({ params }) {
   const { uid } = await params
@@ -135,12 +136,11 @@ export default async function BlogPage({ params }) {
               {/* Related Posts Section */}
               <div className="mt-12 pt-8 border-t">
                 <h2 className="text-2xl font-semibold mb-6">More Blog Posts</h2>
-                <Link 
-                  href="/blog"
-                  className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  View All Posts
-                </Link>
+                <Button asChild>
+                  <Link href="/blog">
+                    View All Posts
+                  </Link>
+                </Button>
               </div>
             </article>
           </div>
